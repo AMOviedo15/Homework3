@@ -1,43 +1,37 @@
 # Aaron Oviedo 1990958
 
-class FoodItem:
+class Team:
+    def __init__(self):
+        self.team_name = 'None'
+        self.team_wins = 0
+        self.team_losses = 0
 
-    def __init__(self, name="None", fat=0.0, carbs=0.0, protein=0.0):
-        self.name = name
-        self.fat = fat
-        self.carbs = carbs
-        self.protein = protein
+    def set_team_name(self, name):
+        self.team_name = name
 
+    def set_team_wins(self, wins):
+        self.team_wins = wins
 
-# implement get_calories() method with single parameter
-    def get_calories(self, num_servings):
-        # Calorie formula
-        calories = ((self.fat * 9) + (self.carbs * 4) + (self.protein * 4)) * num_servings
-        return calories  # return calories value
+    def set_team_losses(self, losses):
+        self.team_losses = losses
 
+    def get_win_percentage(self):
+        return self.team_wins / (self.team_wins + self.team_losses)
 
-# implement print_info()
-    def print_info(self):
-        print('Nutritional information per serving of {}:'.format(self.name))
-        print('   Fat: {:.2f} g'.format(self.fat))
-        print('   Carbohydrates: {:.2f} g'.format(self.carbs))
-        print('   Protein: {:.2f} g'.format(self.protein))
 
 if __name__ == "__main__":
 
-    userfood1 = FoodItem()
+    team = Team()
 
-    item_name = input()
-    amount_fat = float(input())
-    amount_carbs = float(input())
-    amount_protein = float(input())
+    team_name = input()
+    team_wins = int(input())
+    team_losses = int(input())
 
-    userfood2 = FoodItem(item_name, amount_fat, amount_carbs, amount_protein)
+    team.set_team_name(team_name)
+    team.set_team_wins(team_wins)
+    team.set_team_losses(team_losses)
 
-    num_servings = float(input())  # read num of servings
-
-    userfood1.print_info()  # calling print_info() method
-    print('Number of calories for {:.2f} serving(s): {:.2f}'.format(num_servings, userfood1.get_calories(num_servings)))  # calling get_calories() method
-    print()
-    userfood2.print_info()  # calling print_info() method
-    print('Number of calories for {:.2f} serving(s): {:.2f}'.format(num_servings, userfood2.get_calories(num_servings)))  # calling get_calories() method
+    if team.get_win_percentage() >= 0.5:
+        print('Congratulations, Team', team.team_name, 'has a winning average!')
+    else:
+        print('Team', team.team_name, 'has a losing average.')
